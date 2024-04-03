@@ -1,7 +1,7 @@
-import sqlite
-
 import aiogram
 from aiogram import types, Router
+
+import sqlite
 
 router = Router()
 

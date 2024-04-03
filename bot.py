@@ -2,10 +2,8 @@ import asyncio
 import logging
 
 import aiogram
-from aiogram.filters import Command
 
 import Keyboard
-import sqlite
 import config
 import events
 from commands import *
@@ -16,7 +14,6 @@ logging.basicConfig(level=logging.INFO, format='%(name)s - %(message)s       lev
 
 bot = aiogram.Bot(token=config.TOKEN)
 dp = aiogram.Dispatcher()
-
 
 # Commands
 dp.include_router(router)
