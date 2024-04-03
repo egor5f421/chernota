@@ -52,20 +52,20 @@ class ContextInstanceMixin(Generic[ContextInstance]):
     @overload  # noqa: F811
     @classmethod
     def get_current(  # noqa: F811
-        cls, no_error: Literal[True]
+            cls, no_error: Literal[True]
     ) -> Optional[ContextInstance]:  # pragma: no cover  # noqa: F811
         ...
 
     @overload  # noqa: F811
     @classmethod
     def get_current(  # noqa: F811
-        cls, no_error: Literal[False]
+            cls, no_error: Literal[False]
     ) -> ContextInstance:  # pragma: no cover  # noqa: F811
         ...
 
     @classmethod  # noqa: F811
     def get_current(  # noqa: F811
-        cls, no_error: bool = True
+            cls, no_error: bool = True
     ) -> Optional[ContextInstance]:  # pragma: no cover  # noqa: F811
         # on mypy 0.770 I catch that contextvars.ContextVar always contextvars.ContextVar[Any]
         cls.__context_instance = cast(

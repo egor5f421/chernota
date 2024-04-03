@@ -4,3 +4,4 @@ build/
 dist/
 /bot.spec
 /config.py
+venv/

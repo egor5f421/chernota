@@ -1,11 +1,9 @@
-import logging
-
 import asyncio
+import logging
 
 import aiogram
 from aiogram.filters import Command
 
-import Keyboard
 import config
 import events
 from commands import *
@@ -16,14 +14,14 @@ bot = aiogram.Bot(token=config.TOKEN)
 dp = aiogram.Dispatcher()
 
 # Commands
-dp.message.register( cmd_start                 , Command("start")                   )
+dp.message.register(cmd_start, Command("start"))
 
-# Keyboard                                     ,                                    )
-dp.callback_query.register( Keyboard.hello_btn , aiogram.F.data == "hello"          )
+# Keyboard
 
-# Events                                       ,                                    )
-dp.message.register( events.msg                ,                                    )
-dp.edited_message.register( events.edited_msg  ,                                    )
+
+# Events
+dp.message.register(events.msg)
+dp.edited_message.register(events.edited_msg)
 
 
 async def main():
