@@ -5,4 +5,4 @@ dist/
 /bot.spec
 /config.py
 venv/
-/Data Base.db
+'/Data Base.db'
