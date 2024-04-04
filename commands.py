@@ -18,4 +18,4 @@ async def cmd_start(message: types.Message):
                          'меня зовут чернота.'   '\n\n'
                          'Чтобы получить больше функций нажми кнопку ↓', reply_markup=kb.as_markup())
 
-    sqlite.add(message.chat.id, message.chat.username)
+    sqlite.add_user(message.chat.id, message.chat.username)

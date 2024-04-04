@@ -8,9 +8,9 @@ import config
 import events
 from commands import *
 
-sqlite.create_table()
+logging.basicConfig(level=logging.INFO, format='%(levelname)s - %(name)s: %(message)s')
 
-logging.basicConfig(level=logging.INFO, format='%(name)s - %(message)s       level: %(levelname)s')
+sqlite.create_table()
 
 bot = aiogram.Bot(token=config.TOKEN)
 dp = aiogram.Dispatcher()

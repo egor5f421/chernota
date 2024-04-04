@@ -1,12 +1,8 @@
 import logging
 import sqlite3
 
+logger = logging.getLogger(__name__)
 
-def get_logger():
-    return logging.getLogger(__name__)
-
-
-logging.basicConfig(level=logging.INFO, format='%(name)s - %(message)s       level: %(levelname)s')
 conn = sqlite3.connect('Data Base.db')
 c = conn.cursor()
 
@@ -37,30 +33,30 @@ def create_table():
 );''')
 
     delete_connection()
-    get_logger().log(level=logging.INFO, msg="Has the table been created or does it exist")
+    logger.log(level=logging.INFO, msg="Has the table been created or does it exist")
 
 
-def add(id_telegram: int, username: str):
+def add_user(id_telegram: int, username: str):
     create_connection()
 
     if len(c.execute('''SELECT * FROM users WHERE id = {id};'''.format(id=id_telegram)).fetchall()) == 0:
-        c.execute('''INSERT INTO users(id) VALUES ({id});'''
-                  .format(id=id_telegram))
-        get_logger().log(level=logging.INFO, msg="The user has been added")
+        c.execute('''INSERT INTO users(id, username) VALUES ({id}, '{username}');'''
+                  .format(id=id_telegram, username=username))
+        logger.log(level=logging.INFO, msg="The user has been added")
     else:
         c.execute('''UPDATE users SET username = '{username}' WHERE id = {id};'''
                   .format(username=username, id=id_telegram))
-        get_logger().log(level=logging.INFO, msg="The user has been updated")
+        logger.log(level=logging.INFO, msg="The user has been updated")
 
     delete_connection()
 
 
-def delete(id_telegram: int):
+def delete_user(id_telegram: int):
     create_connection()
 
     if len(c.execute('''SELECT * FROM users WHERE id = {id};'''.format(id=id_telegram)).fetchall()) != 0:
         c.execute('''DELETE FROM users WHERE id = {id};'''.format(id=id_telegram))
-        get_logger().log(level=logging.INFO, msg="The user has been deleted")
+        logger.log(level=logging.INFO, msg="The user has been deleted")
 
     delete_connection()
 
@@ -72,9 +68,9 @@ def set_premium(id_telegram: int, premium: bool):
         c.execute('''UPDATE users SET isPremium = {is_premium} WHERE id = {id};'''
                   .format(is_premium=premium, id=id_telegram))
         if premium:
-            get_logger().log(level=logging.INFO, msg="Premium added")
+            logger.log(level=logging.INFO, msg="Premium added")
         else:
-            get_logger().log(level=logging.INFO, msg="Premium removed")
+            logger.log(level=logging.INFO, msg="Premium removed")
 
     delete_connection()
 

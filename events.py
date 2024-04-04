@@ -1,6 +1,16 @@
-from aiogram import types, Router
+from aiogram import types, Router, F
 
 router = Router()
+
+
+@router.message((F.text.lower() == "не знаю") | F.text.isupper())
+async def msg(message: types.Message):
+    if message.text.lower() == "не знаю":
+        await message.answer("А ну говори, что не знаеш?")
+        return
+    elif message.text.isupper():
+        await message.answer("Следи за капсом, а то покусаю, и тоже капсом писать буду!".upper())  # 🫘 🐟
+        return
 
 
 @router.message()
@@ -9,12 +19,6 @@ async def msg(message: types.Message):
         print(message.text)
     except UnicodeEncodeError:
         print(message.content_type)
-    if message.text.lower() == "не знаю":
-        await message.answer("А ну говори, что не знаеш?")
-        return
-    elif message.text.isupper():
-        await message.answer("Следи за капсом, а то покусаю, и тоже капсом писать буду!".upper())  # 🫘 🐟
-        return
 
     await message.answer("Что ты хочешь сказать?")
 
